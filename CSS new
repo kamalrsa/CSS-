@@ -1,0 +1,197 @@
+Target dark mode in CSS
+In Media Queries Level 5, CSS has introduced a media feature called prefers-color-scheme which will help you detect whether the browser's system is operating in dark mode or not, and let you tweak styles based on this.
+
+You can use it like any other media query:
+
+body {
+  background-color: hsl(0, 0%, 95%);
+  color: hsl(0, 0%, 5%);
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: hsl(0, 0%, 5%);
+    color: hsl(0, 0%, 95%);
+  }
+}
+You can also use the value light and design your site dark-first:
+
+body {
+  background-color: hsl(0, 0%, 5%);
+  color: hsl(0, 0%, 95%);
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: hsl(0, 0%, 95%);
+    color: hsl(0, 0%, 5%);
+  }
+  
+  
+  Use fewer but smarter selectors
+The :not() pseudo-selector in combination with other selectors has an amazing use case which will help you tidy up your CSS code.
+
+For example in some cases you would like to give some margin to all list items, except for the last one using two selectors:
+
+ul.myList > li {
+  margin-bottom: 1em;
+}
+
+ul.myList > li:last-child {
+  margin-bottom: 0;
+}
+Instead, you could combine :not() and :last-child and do it all in one go:
+
+ul.myList > li:not(:last-child) {
+  margin-bottom: 1em;
+}
+This practice will help search engines understand your content better, and even help your SEO.
+
+Additionally, there is a HTML element called cite, which is used for the title of the work you were citing. You can use this in combination with the blockquote element, and if you feel fancy, you can even wrap it in a figure. While the cite element does not support the cite property, you can put an anchor link inside:
+
+<figure>
+  <blockquote cite='https://en.wikipedia.org/wiki/HTML5'>
+    <p>HTML5 includes detailed processing models to encourage more interoperable implementations; it extends, improves, and rationalizes the markup available for documents and introduces markup and application programming interfaces (APIs) for complex web applications.</p>
+  </blockquote>
+  <figcaption>
+    From the page
+    <cite>
+      <a href='https://en.wikipedia.org/wiki/HTML5'>
+        HTML5
+      </a>
+    </cite>
+    on Wikipedia
+  </figcaption>
+</figure>
+
+Reduce motion
+In Media Queries Level 5, CSS has introduced a media feature called prefers-reduced-motion which will help you detect if the user has requested that you avoid unnecessary animations.
+
+Your users may want to opt out of non-essential motion for a variety of reasons. For example people with vestibular motion disorders or OCD might have difficulties using your site when things are moving around. Others might just feel that it is easier to focus on the task at hand when they are not distracted by your delightful animations. Either way, respecting their choices is the right thing to do.
+
+You can use prefers-reduced-motion like any other media query:
+
+button {
+  background-color: hsl(0, 0%, 95%);
+  color: hsl(0, 0%, 5%);
+  transition: background-color 0.5s;
+}
+
+button:hover, button:focus {
+  background-color: hsl(0, 0%, 85%);
+}
+
+@media (prefers-reduced-motion) {
+  button {
+    transition-property: none;
+  }
+}
+Beyond console.log
+If you are a fellow console.log enthusiast, you might be delighted to learn a few new tricks.
+
+When logging a single variable in the console, instead of labeling your console.log statements with a string, you can put your variable inside an object:
+
+// Instead of
+console.log('myVariable', myVariable)
+
+// you can simply do
+console.log({myVariable})
+If you want to log something in the console when a certain condition is met, you can use the console.assert statement:
+
+// Instead of
+if (myVariable > 10) {
+  console.log('myVariable', myVariable)
+}
+
+// you can simply do
+console.assert(myVariable > 10, myVariable)
+Finally, when printing arrays or objects in the console, you can use console.table, which will print the variable in a very easy to read format. It works nicely with non-flat objects and arrays.
+
+// Instead of
+console.log(myArray)
+console.log(myObject)
+
+// you can simply do
+console.table(myArray)
+console.table(myObject)
+The ternary operator
+When you want to conditionally assign a value, instead of an if statement, the ternary operator could come in handy.
+
+// Instead of
+let myVariable;
+if (condition) {
+  myVariable = 'then value'
+}
+else {
+  myVariable = 'else value'
+}
+
+// you can simply do
+const myVariable = condition ? 'then value' : 'else value'
+The same thing works in any expression:
+
+// Instead of
+if (condition) {
+  myDiv.style.width = '200px'
+}
+else {
+  myDiv.style.width = '800px'
+}
+
+// you can simply do
+myDiv.style.width = condition ? '200px' : '800px'
+You can even use it to conditionally access one object property or another:
+
+// Instead of
+if (condition) {
+  myDiv.classList.add('hidden')
+}
+else {
+  myDiv.classList.remove('hidden')
+}
+Inline and block shorthands
+In CSS, if you want to set the margin or padding value of an element to the same value on the top and the bottom, or on the left and the right, you can use the margin-block, margin-inline, padding-block, padding-inline properties respectively:
+
+/* Instead of */
+.myElement {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* you can simply do */
+.myElement {
+  margin-block: 10px;
+}
+
+/* Instead of */
+.myElement {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* you can simply do */
+.myElement {
+  margin-inline: 10px;
+}
+
+/* Instead of */
+.myElement {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* you can simply do */
+.myElement {
+  padding-block: 10px;
+}
+
+/* Instead of */
+.myElement {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* you can simply do */
+.myElement {
+  padding-inline: 10px;
+}
